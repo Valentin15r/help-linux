@@ -1,27 +1,27 @@
 #!/bin/sh
 
-read -p "Установить DWM? (да/нет): " answer
-if [ "$answer" != "да" ]; then
-    echo "Установка отменена."
+read -p "Install DWM? (yes/no): " answer
+if [ "$answer" != "yes" ]; then
+    echo "Installation cancelled."
     exit 0
 fi
 
-echo "Обновление системы..."
+echo "Updating the system..."
 sudo apk update
 
-echo "Установка зависимостей..."
+echo "Installing dependencies..."
 sudo apk add git xorg-server xinit dmenu
 
-echo "Клонирование DWM..."
+echo "Cloning DWM..."
 mkdir -p ~/suckless
 git clone https://git.suckless.org/dwm ~/suckless/dwm
 
-echo "Сборка и установка DWM..."
+echo "Building and installing DWM..."
 cd ~/suckless/dwm
 make
 sudo make install
 
-echo "Создание .xinitrc..."
+echo "Creating .xinitrc..."
 echo "exec dwm" > ~/.xinitrc
 
-echo "Установка завершена! Вы можете запустить DWM с помощью команды 'startx'."
+echo "Installation completed! You can start DWM using the command 'startx'."
